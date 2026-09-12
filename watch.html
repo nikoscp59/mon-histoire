@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture — Mon histoire</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="./index.html">MON HISTOIRE</a>
+  </header>
+
+  <main class="watch">
+    <a class="back" href="./index.html">← Retour aux vidéos</a>
+    <div id="watch-content"></div>
+  </main>
+
+  <script src="./app.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get("id") || "1";
+    const item = videos.find(v => String(v.id) === String(id));
+    const box = document.getElementById("watch-content");
+
+    if (!item) {
+      box.innerHTML = "<h1>Vidéo introuvable</h1>";
+    } else {
+      box.innerHTML = `
+        <p class="eyebrow">FILM ${String(item.id).padStart(2,"0")}</p>
+        <h1>${escapeHtml(item.title)}</h1>
+        <p class="watch-description">${escapeHtml(item.description)}</p>
+        <div class="player-wrap">
+          <video controls playsinline preload="metadata" ${item.poster ? `poster="${item.poster}"` : ""}>
+            <source src="${item.video}" type="video/mp4">
+            Ton navigateur ne peut pas lire cette vidéo.
+          </video>
+        </div>
+      `;
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+  </script>
+</body>
+</html>
