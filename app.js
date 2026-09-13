@@ -4,8 +4,8 @@ const videos = [
     title: "Écoute mon histoire",
     description: "Le premier film — mon parcours, raconté de mon point de vue.",
     date: "2026-09-13",
-    duration: "01:00:00",
-    video: "./videos/film-01.mp4",
+    duration: "29:00",
+    video: "https://www.youtube.com/watch?v=5DSzgHzHdWE",
     poster: ""
   }
 ];
@@ -16,6 +16,7 @@ const empty = document.getElementById("empty");
 
 function render(list) {
   if (!grid) return;
+
   grid.innerHTML = list.map(v => `
     <a class="card" href="./watch.html?id=${v.id}">
       <div class="thumb">
@@ -29,12 +30,17 @@ function render(list) {
       </div>
     </a>
   `).join("");
+
   empty.hidden = list.length !== 0;
 }
 
 function escapeHtml(text) {
   return String(text).replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
   }[c]));
 }
 
@@ -43,6 +49,7 @@ render(videos);
 if (search) {
   search.addEventListener("input", () => {
     const q = search.value.trim().toLowerCase();
+
     render(videos.filter(v =>
       v.title.toLowerCase().includes(q) ||
       v.description.toLowerCase().includes(q)
