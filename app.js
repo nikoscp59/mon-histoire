@@ -5,7 +5,7 @@ const videos = [
     description: "Le premier film — mon parcours, raconté de mon point de vue.",
     date: "2026-09-13",
     duration: "29:00",
-    video: "https://www.youtube.com/watch?v=5DSzgHzHdWE",
+    video: "https://www.youtube.com/watch?v=YYlGniMTArw",
     poster: ""
   }
 ];
