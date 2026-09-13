@@ -29,18 +29,26 @@
         <p class="eyebrow">FILM ${String(item.id).padStart(2,"0")}</p>
         <h1>${escapeHtml(item.title)}</h1>
         <p class="watch-description">${escapeHtml(item.description)}</p>
+
         <div class="player-wrap">
-          <video controls playsinline preload="metadata" ${item.poster ? `poster="${item.poster}"` : ""}>
-            <source src="${item.video}" type="video/mp4">
-            Ton navigateur ne peut pas lire cette vidéo.
-          </video>
+          <iframe
+            src="https://www.youtube.com/embed/5DSzgHzHdWE"
+            title="${escapeHtml(item.title)}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
         </div>
       `;
     }
 
     function escapeHtml(text) {
       return String(text).replace(/[&<>"']/g, c => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
       }[c]));
     }
   </script>
